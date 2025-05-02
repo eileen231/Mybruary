@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').parse() //load up/imports the dependencies if not in right environment
+    require('dotenv').config() //load up/imports the dependencies if not in right environment
 }
 
 const express = require('express')
@@ -19,7 +19,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true}) // don't want to hardcode this
 const db = mongoose.connection
 db.on('error', error => console.error(error))
-db.once('error', () => console.log('Connected to Mongoose'))
+db.once('open', () => console.log('Connected to Mongoose'))
 
 app.use('/', indexRouter)
 
