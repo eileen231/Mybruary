@@ -7,6 +7,7 @@ const app = express()
 const expressLayouts = require('express-ejs-layouts')
 
 const indexRouter = require('./routes/index') //reference to the index router 
+const authorRouter = require('./routes/authors') //reference to the index router 
 
 app.set('view engine', 'ejs') 
 app.set('views', __dirname + '/views') //where server files will go
@@ -22,5 +23,6 @@ db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 
 app.use('/', indexRouter)
+app.use('/authors', authorRouter) //want to only call on authors routes to be prepended to authors
 
 app.listen(process.env.PORT || 3000) //gonna tell us what port it is listening to
